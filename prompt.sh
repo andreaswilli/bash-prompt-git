@@ -62,6 +62,3 @@ git_prompt() {
 
   echo -e "$prompt"
 }
-
-# Test: echo the prompt
-git_prompt
