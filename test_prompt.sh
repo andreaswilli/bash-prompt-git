@@ -174,7 +174,7 @@ EXPECTED["7:4"]="<asdf> myrepo"
 
 fmt_jsons=()
 for fmt in "${FORMATS[@]}"; do
-  fmt_jsons+=("$(printf '%s' "$fmt" | python3 -c 'import sys,json;print(json.dumps(sys.stdin.read()),end="")')")
+  fmt_jsons+=("$(printf '%s' "$fmt" | node -e 'let d="";process.stdin.on("data",c=>d+=c);process.stdin.on("end",()=>process.stdout.write(JSON.stringify(d)))')")
 done
 
 js_input="["
