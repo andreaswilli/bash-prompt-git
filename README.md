@@ -108,14 +108,14 @@ separators.
 Minimal — branch only:
 
 ```bash
-export GIT_PROMPT_FORMAT='{<branch>}'
+export GIT_PROMPT_FORMAT='<branch>'
 # main
 ```
 
 Compact — no brackets:
 
 ```bash
-export GIT_PROMPT_FORMAT='<repo> {<branch>}{:<behind>}{:<ahead>}{:<staged>}{:<unstaged>}'
+export GIT_PROMPT_FORMAT='<repo> <branch>{:<behind>}{:<ahead>}{:<staged>}{:<unstaged>}'
 # myrepo main:↓3:+:*
 ```
 
