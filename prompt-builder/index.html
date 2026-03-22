@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bash-prompt-git Builder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>bash-prompt-git Builder</h1>
+  <p>Customize your git prompt format and colors with a live preview</p>
+</div>
+
+<!-- Presets -->
+<div class="presets">
+  <h3>Presets</h3>
+  <div class="preset-bar" id="preset-bar"></div>
+</div>
+
+<!-- Format editor -->
+<div class="format-editor">
+  <h3>Format String</h3>
+  <input type="text" id="format-input" spellcheck="false">
+  <details>
+    <summary style="color:var(--text-dim);font-size:0.82rem;cursor:pointer;margin-bottom:0.3rem;">Placeholder reference</summary>
+    <div class="placeholder-ref">
+      <code>&lt;repo&gt;</code><span>Repository name</span>
+      <code>&lt;path&gt;</code><span>Sub-path within repo (empty at root)</span>
+      <code>&lt;branch&gt;</code><span>Current branch name</span>
+      <code>&lt;behind&gt;</code><span>Behind remote indicator, e.g. ↓3</span>
+      <code>&lt;ahead&gt;</code><span>Ahead of remote indicator, e.g. ↑2</span>
+      <code>&lt;no_remote&gt;</code><span>× when no remote tracking branch</span>
+      <code>&lt;staged&gt;</code><span>+ when staged changes exist</span>
+      <code>&lt;unstaged&gt;</code><span>* when unstaged changes exist</span>
+      <code>{ }</code><span>Conditional group — removed when all placeholders inside are empty</span>
+    </div>
+  </details>
+</div>
+
+<!-- Colors -->
+<div class="colors">
+  <h3>Colors</h3>
+  <p class="note">Actual colors depend on your terminal's color scheme. Preview shows Catppuccin Mocha.</p>
+  <div class="color-grid" id="color-grid"></div>
+</div>
+
+<!-- Preview -->
+<div class="preview">
+  <h3>Preview</h3>
+  <div class="terminal">
+    <div class="terminal-titlebar">
+      <div class="terminal-dot r"></div>
+      <div class="terminal-dot y"></div>
+      <div class="terminal-dot g"></div>
+    </div>
+    <div class="terminal-body" id="terminal-body"></div>
+  </div>
+</div>
+
+<!-- Export -->
+<div class="export">
+  <h3>Export</h3>
+  <p class="note">Add these lines to your <code>~/.bashrc</code> — either as top-level exports before sourcing <code>prompt.sh</code>, or inside your <code>PROMPT_COMMAND</code> function. Then restart your shell or run <code>source ~/.bashrc</code>.</p>
+  <div class="export-block" id="export-block"></div>
+  <button class="copy-btn" id="copy-btn">Copy to clipboard</button>
+</div>
+
+<script src="builder.js"></script>
+</body>
+</html>
