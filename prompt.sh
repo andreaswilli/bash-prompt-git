@@ -10,7 +10,8 @@ git_prompt() {
   local color_repo="${GIT_PROMPT_COLOR_REPO:-\[\033[0;34m\]}"
   local color_path="${GIT_PROMPT_COLOR_PATH:-\[\033[0m\]}"
   local color_branch="${GIT_PROMPT_COLOR_BRANCH:-\[\033[0;34m\]}"
-  local color_behind_ahead="${GIT_PROMPT_COLOR_BEHIND_AHEAD:-\[\033[0;33m\]}"
+  local color_behind="${GIT_PROMPT_COLOR_BEHIND:-\[\033[0;33m\]}"
+  local color_ahead="${GIT_PROMPT_COLOR_AHEAD:-\[\033[0;33m\]}"
   local color_no_remote="${GIT_PROMPT_COLOR_NO_REMOTE:-\[\033[0;33m\]}"
   local color_staged="${GIT_PROMPT_COLOR_STAGED:-\[\033[0;32m\]}"
   local color_unstaged="${GIT_PROMPT_COLOR_UNSTAGED:-\[\033[0;31m\]}"
@@ -43,11 +44,11 @@ git_prompt() {
     local ba=$(git_behind_ahead)
     local behind=$(git_behind "$ba")
     if [ -n "$behind" ]; then
-      c_behind="${color_behind_ahead}↓${behind}${reset}"
+      c_behind="${color_behind}↓${behind}${reset}"
     fi
     local ahead=$(git_ahead "$ba")
     if [ -n "$ahead" ]; then
-      c_ahead="${color_behind_ahead}↑${ahead}${reset}"
+      c_ahead="${color_ahead}↑${ahead}${reset}"
     fi
   else
     c_no_remote="${color_no_remote}×${reset}"

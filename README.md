@@ -52,7 +52,8 @@ Override any color with standard Bash PS1 escape sequences:
 | `GIT_PROMPT_COLOR_REPO`          | Blue     | Repository name        |
 | `GIT_PROMPT_COLOR_PATH`          | Reset    | Sub-path within repo   |
 | `GIT_PROMPT_COLOR_BRANCH`        | Blue     | Branch name            |
-| `GIT_PROMPT_COLOR_BEHIND_AHEAD`  | Yellow   | Behind/ahead counters  |
+| `GIT_PROMPT_COLOR_BEHIND`        | Yellow   | Behind remote counter  |
+| `GIT_PROMPT_COLOR_AHEAD`         | Yellow   | Ahead of remote counter|
 | `GIT_PROMPT_COLOR_NO_REMOTE`     | Yellow   | No-remote indicator    |
 | `GIT_PROMPT_COLOR_STAGED`        | Green    | Staged indicator       |
 | `GIT_PROMPT_COLOR_UNSTAGED`      | Red      | Unstaged indicator     |
