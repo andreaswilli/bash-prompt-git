@@ -3,33 +3,7 @@
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SOURCE_DIR/helpers.sh"
 
-# Configurable via env vars (set before sourcing):
-#
-# Colors:
-#   GIT_PROMPT_COLOR_REPO          (default: blue)
-#   GIT_PROMPT_COLOR_PATH          (default: reset)
-#   GIT_PROMPT_COLOR_BRANCH        (default: blue)
-#   GIT_PROMPT_COLOR_BEHIND_AHEAD  (default: yellow)
-#   GIT_PROMPT_COLOR_NO_REMOTE     (default: yellow)
-#   GIT_PROMPT_COLOR_STAGED        (default: green)
-#   GIT_PROMPT_COLOR_UNSTAGED      (default: red)
-#
-# Format template:
-#   GIT_PROMPT_FORMAT
-#
-# Available placeholders:
-#   <repo>      - repository name
-#   <path>      - sub-path within the repo
-#   <branch>    - current branch
-#   <behind>    - behind remote indicator, e.g. ↓3 (empty if 0)
-#   <ahead>     - ahead of remote indicator, e.g. ↑2 (empty if 0)
-#   <no_remote> - shown when no remote branch exists (empty otherwise)
-#   <staged>    - staged changes indicator (empty if none)
-#   <unstaged>  - unstaged changes indicator (empty if none)
-#
-# Groups: wrap text in { } to make it conditional. A group is removed
-# entirely when all placeholders inside it resolved to empty.
-#   e.g. {|<behind>} outputs "|↓3" when behind, or nothing at all.
+# Customizable git prompt. See README.md for configuration details.
 
 git_prompt() {
   local reset='\[\033[0m\]'
