@@ -92,7 +92,7 @@ separators.
 
 ```
 {|<behind>}   →  "|↓3"  when behind remote
-               →  ""     when not behind (group removed)
+              →  ""     when not behind (group removed)
 ```
 
 > **Note:** Nested groups are not supported. Braces cannot be nested.
@@ -100,7 +100,7 @@ separators.
 #### Default template
 
 ```
-[<repo><path>] ({<branch>}{|<behind>}{|<ahead>}{|<no_remote>}{|<staged>}{|<unstaged>})
+[<repo><path>] (<branch>{|<behind>}{|<ahead>}{|<no_remote>}{|<staged>}{|<unstaged>})
 ```
 
 ### Examples

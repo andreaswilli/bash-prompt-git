@@ -19,7 +19,7 @@ git_prompt() {
   if [ -n "$GIT_PROMPT_FORMAT" ]; then
     format="$GIT_PROMPT_FORMAT"
   else
-    format='[<repo><path>] ({<branch>}{|<behind>}{|<ahead>}{|<no_remote>}{|<staged>}{|<unstaged>})'
+    format='[<repo><path>] (<branch>{|<behind>}{|<ahead>}{|<no_remote>}{|<staged>}{|<unstaged>})'
   fi
 
   local repo=$(git_repo_name)
