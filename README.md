@@ -3,20 +3,6 @@
 A lightweight, customizable git prompt for Bash. Shows repository info, branch,
 sync status, and working tree state directly in your `PS1`.
 
-### Default output
-
-```
-[my-repo/src] (main|↓3|↑1|+|*)
- ^^^^^^^^^^^   ^^^^ ^^ ^^ ^ ^
- repo + path     │   │  │ │ └─ unstaged changes
-                 │   │  │ └─── staged changes
-                 │   │  └───── ahead of remote
-                 │   └──────── behind remote
-                 └──────────── branch
-```
-
-When there is no remote tracking branch, `×` is shown instead of behind/ahead.
-
 ## Installation
 
 Source `prompt.sh` in your `~/.bashrc` and use `PROMPT_COMMAND` to set `PS1`:
