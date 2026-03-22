@@ -15,7 +15,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: bash test_prompt.sh
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -28,3 +38,4 @@ jobs:
           path: prompt-builder
       - id: deployment
         uses: actions/deploy-pages@v4
+
