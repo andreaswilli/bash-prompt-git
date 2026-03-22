@@ -87,10 +87,9 @@ const SCENARIOS = [
   },
 ];
 
-// ── Prompt Rendering Engine ───────────────────────────────────────
-// Mirrors the bash logic in prompt.sh:
-//   1. Replace <placeholder> with colored value or mark as empty
-//   2. Remove {…} groups where all placeholders resolved to empty
+// ── Prompt Rendering ──────────────────────────────────────────────
+// Template engine is in engine.js (shared with tests).
+// renderPrompt wraps it with color/HTML decoration.
 
 const PLACEHOLDER_TO_KEY = {
   repo: 'REPO',
@@ -103,55 +102,17 @@ const PLACEHOLDER_TO_KEY = {
   unstaged: 'UNSTAGED',
 };
 
-const SENTINEL_EMPTY  = '\x01';
-const SENTINEL_FILLED = '\x02';
-
 function renderPrompt(format, colors, scenario) {
-  let output = format;
-
-  // Replace each placeholder
+  const values = {};
   for (const [placeholder, colorKey] of Object.entries(PLACEHOLDER_TO_KEY)) {
-    const value = scenario[placeholder] || '';
-    const pattern = `<${placeholder}>`;
-    let replacement;
-    if (value) {
-      const color = findColorByAnsi(colors[colorKey]);
-      const coloredValue = wrapColor(escapeHtml(value), color);
-      replacement = SENTINEL_FILLED + coloredValue;
-    } else {
-      replacement = SENTINEL_EMPTY;
-    }
-    output = output.split(pattern).join(replacement);
+    const text = scenario[placeholder] || '';
+    const color = findColorByAnsi(colors[colorKey]);
+    values[placeholder] = {
+      text,
+      wrap: (t) => wrapColor(escapeHtml(t), color),
+    };
   }
-
-  // Process conditional groups {…}
-  let result = '';
-  let rest = output;
-  while (rest.includes('{')) {
-    const openIdx = rest.indexOf('{');
-    result += rest.substring(0, openIdx);
-    rest = rest.substring(openIdx + 1);
-    const closeIdx = rest.indexOf('}');
-    if (closeIdx === -1) {
-      // No closing brace, treat rest as literal
-      result += '{' + rest;
-      rest = '';
-      break;
-    }
-    const group = rest.substring(0, closeIdx);
-    rest = rest.substring(closeIdx + 1);
-    // Keep the group only if at least one placeholder was non-empty
-    if (group.includes(SENTINEL_FILLED)) {
-      result += group;
-    }
-  }
-  result += rest;
-
-  // Remove sentinels
-  result = result.split(SENTINEL_EMPTY).join('');
-  result = result.split(SENTINEL_FILLED).join('');
-
-  return result;
+  return renderTemplate(format, values);
 }
 
 function escapeHtml(str) {
