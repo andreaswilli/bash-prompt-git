@@ -43,7 +43,7 @@ All configuration is done through environment variables. Set them **before**
 sourcing `prompt.sh` or anywhere in your `~/.bashrc` before the prompt is
 evaluated.
 
-> **Tip:** Use the [Prompt Builder](prompt-builder/index.html) to interactively
+> **Tip:** Use the [Prompt Builder](https://andreaswilli.github.io/bash-prompt-git/) to interactively
 > pick a format and colors with a live preview, then copy the generated config.
 
 ### Colors
