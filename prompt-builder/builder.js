@@ -103,6 +103,20 @@ const PLACEHOLDER_TO_KEY = {
 };
 
 function renderPrompt(format, colors, scenario) {
+  // Escape literal HTML in the format string while preserving known <placeholder> tokens.
+  let safeFormat = format;
+  const preserved = {};
+  for (const p of Object.keys(PLACEHOLDER_TO_KEY)) {
+    const token = `<${p}>`;
+    const sentinel = `\x00${p}\x00`;
+    safeFormat = safeFormat.split(token).join(sentinel);
+    preserved[sentinel] = token;
+  }
+  safeFormat = escapeHtml(safeFormat);
+  for (const [sentinel, token] of Object.entries(preserved)) {
+    safeFormat = safeFormat.split(sentinel).join(token);
+  }
+
   const values = {};
   for (const [placeholder, colorKey] of Object.entries(PLACEHOLDER_TO_KEY)) {
     const text = scenario[placeholder] || '';
@@ -112,7 +126,7 @@ function renderPrompt(format, colors, scenario) {
       wrap: (t) => wrapColor(escapeHtml(t), color),
     };
   }
-  return renderTemplate(format, values);
+  return renderTemplate(safeFormat, values);
 }
 
 function escapeHtml(str) {
